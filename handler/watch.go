@@ -4,22 +4,27 @@ import (
 	"context"
 	"fmt"
 	"github.com/tendermint/tendermint/libs/pubsub/query"
-	"github.com/tendermint/tendermint/types"
+	"github.com/tendermint/tendermint/rpc/client"
+	"time"
 )
 
 func Watch() {
+	timeout := 8 * time.Second
 
-	client := client.NewHTTP(nodeURI, "/websocket")
+	c := client.NewHTTP(nodeURI, "/websocket")
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
-	query := query.MustParse("tm.event = 'Tx' AND account.owner CONTAINS 'xx' AND  message.action='send'")
-	txs := make(chan interface{})
-	err := client.Subscribe(ctx, "test-client", query, txs)
+	q := query.MustParse("tm.event = 'Tx' AND account.owner CONTAINS 'xx' AND  message.action='send'")
+	outs, err := c.Subscribe(ctx, "test-client", q.String(), 1)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	go func() {
 
-		for e := range txs {
-			fmt.Println("got ", e.(types.EventDataTx))
+		for e := range outs {
+			fmt.Println("got ", e)
 		}
 	}()
 

@@ -49,6 +49,8 @@ func RunServer() {
 	r.HandleFunc("/query/commission/{address}", handler.QueryCommission)
 	r.HandleFunc("/query/outstanding_rewards/{address}", handler.QueryOutstandingRewards)
 	r.HandleFunc("/query/node_info", handler.QueryNodeInfo)
+	r.HandleFunc("/send/from/{from}/to/{to}/amount/{amount}/privkey/{privkey}/gas/{gas}", handler.SendTx)
+	r.HandleFunc("/watch", handler.Watch)
 
 	log.Printf("Start pluschainapi  at http://%s/", addr)
 	if err := http.ListenAndServe(addr, r); err != nil {
