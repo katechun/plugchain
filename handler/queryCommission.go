@@ -11,7 +11,7 @@ import (
 
 func QueryCommission(w http.ResponseWriter, r *http.Request) {
 	ret := tool.Result{}
-	addr := tool.ResultVal(r, "address")
+	addr := tool.ResultVal(r, "validator_address")
 	url := "http://" + apiURL + "/cosmos/distribution/v1beta1/validators/" + addr + "/commission"
 
 	client := &http.Client{}

@@ -12,7 +12,7 @@ import (
 
 func QueryPledge(w http.ResponseWriter, r *http.Request) {
 	ret := tool.Result{}
-	addr := tool.ResultVal(r, "address")
+	addr := tool.ResultVal(r, "validator_address")
 	url := "http://" + apiURL + "/cosmos/staking/v1beta1/validators/" + addr + "/delegations"
 
 	client := &http.Client{}

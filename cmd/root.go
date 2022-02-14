@@ -45,10 +45,11 @@ func RunServer() {
 
 	// 设置路由，如果访问/，则调用index方法
 	r.HandleFunc("/", handler.Index)
-	r.HandleFunc("/query/pledge/{address}", handler.QueryPledge)
-	r.HandleFunc("/query/commission/{address}", handler.QueryCommission)
-	r.HandleFunc("/query/outstanding_rewards/{address}", handler.QueryOutstandingRewards)
+	r.HandleFunc("/query/pledge/{validator_address}", handler.QueryPledge)
+	r.HandleFunc("/query/commission/{validator_address}", handler.QueryCommission)
+	r.HandleFunc("/query/outstanding_rewards/{validator_address}", handler.QueryOutstandingRewards)
 	r.HandleFunc("/query/node_info", handler.QueryNodeInfo)
+	r.HandleFunc("/query/delegators/{delegator_address}/rewards/{validator_address}", handler.QueryUserRewards)
 	r.HandleFunc("/send/from/{from}/to/{to}/amount/{amount}/privkey/{privkey}/gas/{gas}", handler.SendTx)
 	r.HandleFunc("/watch", handler.Watch)
 
