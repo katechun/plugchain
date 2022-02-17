@@ -6,10 +6,11 @@ import (
 )
 
 var (
-	nodeURI string = "tcp://127.0.0.1:26657"
-	grpcURL string = "39.109.104.67:9090"
-	apiURL  string = "39.109.104.67:1317"
-	chainID string = "plugchain"
+	nodeURI      string = "tcp://127.0.0.1:26657"
+	grpcURL      string = "39.109.104.67:9090"
+	apiURL       string = "39.109.104.67:1317"
+	chainID      string = "plugchain"
+	userinfopath string = "/data/plug/.plugchain/"
 )
 
 // Index serves index page

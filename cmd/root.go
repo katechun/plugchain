@@ -50,7 +50,8 @@ func RunServer() {
 	r.HandleFunc("/query/outstanding_rewards/{validator_address}", handler.QueryOutstandingRewards)
 	r.HandleFunc("/query/node_info", handler.QueryNodeInfo)
 	r.HandleFunc("/query/delegators/{delegator_address}/rewards/{validator_address}", handler.QueryUserRewards)
-	r.HandleFunc("/send/from/{from}/to/{to}/amount/{amount}/privkey/{privkey}/gas/{gas}", handler.SendTx)
+	r.HandleFunc("/send/from/{from}/to/{to}/amount/{amount}/gas/{gas}/priv/{priv}", handler.SendTx)
+	//r.HandleFunc("/send/to/{to}/amount/{amount}/gas/{gas}/user/{user}/passwd/{passwd}", test.Send)
 	r.HandleFunc("/watch", handler.Watch)
 
 	log.Printf("Start pluschainapi  at http://%s/", addr)
